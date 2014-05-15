@@ -7,8 +7,8 @@ require "rapidfire/version"
 Gem::Specification.new do |s|
   s.name        = "rapidfire"
   s.version     = Rapidfire::VERSION
-  s.authors     = ["Yuva Kumar"]
-  s.email       = ["yuva@codemancers.com"]
+  s.authors     = ["Yuva Kumar", 'Al Ameen']
+  s.email       = ["yuva@codemancers.com", "alameen@mobomo.com"]
   s.homepage    = "https://github.com/code-mancers/rapidfire"
   s.summary     = "Surveys made easy."
   s.description = "One stop solution for all survey related requirements! Its tad easy!."

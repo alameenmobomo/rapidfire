@@ -1,40 +1,88 @@
-<h3>Question</h3>
-
-<%= form_for [@question_group, question] do |f| %>
-  <%- unless question.errors.empty? %>
-    <ul>
-      <%- question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<h3>Survey - <%= @question_group.name.capitalize %></h3>
+  
+<div class="panel panel-default">
+  <div class="panel-body">
+    <legend>Add Question</legend>
+    <%= link_to 'Cancel', question_group_questions_path(@question_group), class: 'btn btn-default pull-right' %>
+    <%= form_for [@question_group, question], html: { class: 'form-horizontal', role: :form } do |f| %>
+      <%- unless question.errors.empty? %>
+        <ul>
+          <%- question.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
 
-  <%= f.label :type %>
-  <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
+      <div class="form-group">
+        <%= f.label :type, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type", class: 'form-control' %>
+        </div>
+      </div>
+    
+    
+      <div class="form-group">  
+        <%= f.label :question_text, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.text_field :question_text, class: 'form-control' %>
+        </div>
+      </div>
 
-  <%= f.label :question_text %>
-  <%= f.text_field :question_text %>
+      <div class="form-group">
+        <%= f.label :answer_options, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.text_area :answer_options, rows: 5, class: 'form-control' %>
+        </div>
+      </div>
 
-  <%= f.label :answer_options %>
-  <%= f.text_area :answer_options, rows: 5 %>
+      <h4>Other options</h4>
+      <hr/>
 
-  <h4>Other options</h4>
-  <hr/>
+      <div class="form-group">  
+        <%= f.label :answer_presence, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <label class="checkbox">
+            <%= f.check_box :answer_presence %>
+          </label>
+        </div>
+      </div>
 
-  <%= f.label :answer_presence %>
-  <%= f.check_box :answer_presence %>
+      <div class="form-group">  
+        <%= f.label :answer_minimum_length, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.text_field :answer_minimum_length, class: 'form-control' %>
+        </div>
+      </div>
 
-  <%= f.label :answer_minimum_length %>
-  <%= f.text_field :answer_minimum_length %>
+      <div class="form-group">  
+        <%= f.label :answer_maximum_length, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.text_field :answer_maximum_length, class: 'form-control' %>
+        </div>
+      </div>
 
-  <%= f.label :answer_maximum_length %>
-  <%= f.text_field :answer_maximum_length %>
+      <div class="form-group">  
+          <%= f.label :answer_greater_than_or_equal_to, class: 'control-label col-sm-2' %>
+          <div class="col-sm-6">
+            <%= f.text_field :answer_greater_than_or_equal_to, class: 'form-control' %>
+          </div>
+      </div>
+      <div class="form-group">  
+        <%= f.label :answer_less_than_or_equal_to, class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.text_field :answer_less_than_or_equal_to, class: 'form-control' %>
+        </div>
+      </div>
 
-  <%= f.label :answer_greater_than_or_equal_to %>
-  <%= f.text_field :answer_greater_than_or_equal_to %>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>  
+        <div class="col-sm-2">
+          <%= link_to 'Cancel', question_group_questions_path(@question_group), class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-  <%= f.label :answer_less_than_or_equal_to %>
-  <%= f.text_field :answer_less_than_or_equal_to %>
-
-  <%= f.submit %>
-<% end %>
