@@ -1,11 +1,30 @@
-<h2>Please answer these Questions</h2>
-<hr/>
-
 <%= form_for([@question_group, @answer_group_builder]) do |f| %>
-  <%- @answer_group_builder.answers.each do |answer| %>
-    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      <%= render_answer_form_helper(answer, answer_form) %>
-    <% end %>
-  <% end %>
-  <%= f.submit "Save" %>
+	<div class="row">
+		<div class="col-md-8"><h2>Survey - <%= @question_group.name %></h2></div>
+		<div class="col-md-4">
+			<%= link_to 'Cancel and go back', question_groups_path, class: 'btn btn-default', role: :button %>
+			<%= f.submit 'Submit', class: 'btn btn-primary', role: :button %>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%- @answer_group_builder.answers.each do |answer| %>
+		    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+		      <div class="row">
+		      	<div class="col-md-12">
+		      		<%= render_answer_form_helper(answer, answer_form) %>
+		      	</div>
+		      </div>
+		    <% end %>
+		  <% end %>
+		  <br>
+		  <div class="row">
+		  	<div class="col-md-offset-2 col-md-6">
+		  		<%= f.submit "Submit", class: 'btn btn-primary' %>
+		  	</div>
+		  </div>
+		</div>
+	</div>
+  
 <% end %>
