@@ -1,15 +1,37 @@
-<h3><%= question_group.new_record? ? "New Group" : "Edit Group" %></h3>
+<h3>Survey - <%= question_group.new_record? ? "New" : "Edit" %></h3>
 
-<%= form_for question_group do |f| %>
-  <%- if question_group.errors.any? %>
-    <ul>
-      <%- question_group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_for question_group, html: { class: 'form-horizontal', role: :form } do |f| %>
+      <%- if question_group.errors.any? %>
+        <ul>
+          <%- question_group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
-<% end %>
+      <div class="form-group">
+        <%= f.label :name, class: 'control-label col-sm-2 question-text' %>
+        <div class="col-sm-6">
+          <%= f.text_field :name, class: 'form-control' %>  
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :description, class: 'control-label col-sm-2 question-text' %>
+        <div class="col-sm-6">
+          <%= f.text_area :description, rows: 5, class: 'form-control' %>  
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-6">
+          <%= f.submit class: 'btn btn-primary' %>
+          <%= link_to 'Cancel', question_groups_path, class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

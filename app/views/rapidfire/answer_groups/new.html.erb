@@ -9,6 +9,7 @@
 
 	<div class="panel panel-default">
 		<div class="panel-body">
+			<p><%= @question_group.description %></p>
 			<%- @answer_group_builder.answers.each do |answer| %>
 		    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
       			<%= render_answer_form_helper(answer, answer_form) %>
