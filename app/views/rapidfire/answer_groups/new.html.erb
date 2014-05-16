@@ -11,11 +11,7 @@
 		<div class="panel-body">
 			<%- @answer_group_builder.answers.each do |answer| %>
 		    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-		      <div class="row">
-		      	<div class="col-md-12">
-		      		<%= render_answer_form_helper(answer, answer_form) %>
-		      	</div>
-		      </div>
+      			<%= render_answer_form_helper(answer, answer_form) %>
 		    <% end %>
 		  <% end %>
 		  <br>

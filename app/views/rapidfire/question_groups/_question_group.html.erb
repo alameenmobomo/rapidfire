@@ -1,17 +1,31 @@
-<div id= "question_group_<%= question_group.id %>" class="panel panel-default">
-  <div class="panel-body">
-    <% if can_administer? %>
-      <h4><%= link_to question_group.name, question_group_questions_path(question_group) %></h4> 
-    <% else %>
-      <%= question_group.name %>
-    <% end %>
-    <td>
-      <ul class="horizontal-list">
-        <li><%= link_to "Take Survey", new_question_group_answer_group_path(question_group) %></li>
+<div id= "question_group_<%= question_group.id %>" class="well">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>
+        <%= can_administer? ? link_to(question_group.name, question_group_questions_path(question_group)) : question_group.name %>
+      </h4>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+      </p>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+      </p>
+    </div>
+
+    <div class="col-md-4">
+      <div class="btn-group-vertical">
         <% if can_administer? %>
-          <li><%= link_to "Results", [:results, question_group] %></li>
-          <li><%= link_to "Delete", [question_group], method: :delete %></li>
+          <%= link_to "Results", [:results, question_group], class: 'btn btn-default' %>
+          <%= link_to "Delete", [question_group], method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <%= link_to "Take Survey", new_question_group_answer_group_path(question_group), class: 'btn btn-primary' %>
         <% end %>
-      </ul>
+      </div>
+    </div>
   </div>
 </div>
