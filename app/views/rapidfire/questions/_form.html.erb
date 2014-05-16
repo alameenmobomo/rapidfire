@@ -3,8 +3,10 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <legend>Add Question</legend>
-    <%= link_to 'Cancel', question_group_questions_path(@question_group), class: 'btn btn-default pull-right' %>
     <%= form_for [@question_group, question], html: { class: 'form-horizontal', role: :form } do |f| %>
+      <%= link_to 'Cancel', question_group_questions_path(@question_group), class: 'btn btn-default pull-right' %>
+      <%= f.submit class: 'btn btn-primary pull-right m-right-15' %>
+      
       <%- unless question.errors.empty? %>
         <ul>
           <%- question.errors.full_messages.each do |message| %>
