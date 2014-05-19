@@ -17,6 +17,7 @@ module Rapidfire
           text = answer_attributes[:answer_text]
           answer.answer_text =
             text.is_a?(Array) ? strip_checkbox_answers(text).join(',') : text
+          answer.user_specific_option = answer_attributes[:user_specific_option]
         end
       end
 
@@ -25,10 +26,10 @@ module Rapidfire
 
     def save(options = {})
       save!(options)
-    rescue Exception => e
-      # repopulate answers here in case of failure as they are not getting updated
-      @answers = @question_group.questions.collect do |question|
-        @answer_group.answers.find { |a| a.question_id == question.id }
+    	rescue Exception => e
+	      # repopulate answers here in case of failure as they are not getting updated
+	      @answers = @question_group.questions.collect do |question|
+	        @answer_group.answers.find { |a| a.question_id == question.id }
       end
       false
     end

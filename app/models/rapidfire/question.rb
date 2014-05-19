@@ -1,6 +1,7 @@
 module Rapidfire
   class Question < ActiveRecord::Base
     belongs_to :question_group, :inverse_of => :questions
+
     has_many   :answers
 
     default_scope { order(:position) }
@@ -9,7 +10,7 @@ module Rapidfire
     serialize :validation_rules
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_group, :question_text, :validation_rules, :answer_options
+      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :user_specific_option_text
     end
 
     def self.inherited(child)

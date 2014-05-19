@@ -10,8 +10,8 @@ module Rapidfire
       def validate_answer(answer)
         super(answer)
 
-        if rules[:presence] == "1" || answer.answer_text.present?
-          answer.validates_inclusion_of :answer_text, :in => options
+        if (rules[:presence] == "1" || answer.answer_text.present?) and answer.user_specific_option.blank?
+          answer.validates_inclusion_of :answer_text, :in => options 
         end
       end
     end

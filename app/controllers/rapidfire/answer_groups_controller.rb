@@ -18,7 +18,7 @@ module Rapidfire
 
     private
     def find_question_group!
-      @question_group = QuestionGroup.find(params[:question_group_id])
+      @question_group = QuestionGroup.find(params[:question_group_id], include: :questions)
     end
 
     def answer_group_params

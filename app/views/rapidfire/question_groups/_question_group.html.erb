@@ -20,6 +20,7 @@
           <%= link_to "Results", [:results, question_group], class: 'btn btn-default' %>
           <%= link_to('Questions', question_group_questions_path(question_group), class: 'btn btn-default') %>
           <%= link_to "Edit", [:edit, question_group], class: 'btn btn-default' %>
+          <%= link_to "Take Survey", new_question_group_answer_group_path(question_group), class: 'btn btn-primary' if ::Rails.env.development? %>
           <%= link_to "Delete", [question_group], method: :delete, class: 'btn btn-danger' %>
         <% else %>
           <%= link_to "Take Survey", new_question_group_answer_group_path(question_group), class: 'btn btn-primary' %>

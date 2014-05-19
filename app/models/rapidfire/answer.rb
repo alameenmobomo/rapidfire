@@ -7,7 +7,7 @@ module Rapidfire
     validate  :verify_answer_text, :if => "question.present?"
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_id, :answer_group, :answer_text
+      attr_accessible :question_id, :answer_group, :answer_text, :user_specific_option
     end
 
     private
