@@ -2,7 +2,7 @@
   
 <div class="panel panel-default">
   <div class="panel-body">
-    <legend>Add Question</legend>
+    <legend><%= action_name == 'new' ? 'New' : 'Edit' %> Question</legend>
     <%= form_for [@question_group, question], html: { class: 'form-horizontal', role: :form } do |f| %>
       <%= link_to 'Cancel', question_group_questions_path(@question_group), class: 'btn btn-default pull-right' %>
       <%= f.submit class: 'btn btn-primary pull-right m-right-15' %>
@@ -44,6 +44,13 @@
         <%= f.label :user_specific_option_text, class: 'control-label col-sm-2' %>
         <div class="col-sm-6">
           <%= f.text_field :user_specific_option_text, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">  
+        <%= f.label :parent_id, 'Parent Question', class: 'control-label col-sm-2' %>
+        <div class="col-sm-6">
+          <%= f.select :parent_id, @question_group.questions.map{ |q| [q.question_text.truncate(100), q.id]}, { prompt: 'Select a parent question or leave empty', include_blank: true }, class: 'form-control' %>
         </div>
       </div>
 

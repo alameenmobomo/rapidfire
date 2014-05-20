@@ -1,16 +1,19 @@
 module Rapidfire
   class Question < ActiveRecord::Base
     belongs_to :question_group, :inverse_of => :questions
+    belongs_to :parent, class_name: 'Question', foreign_key: :parent_id
 
     has_many   :answers
+    has_many :sub_questions, class_name: 'Question', foreign_key: :parent_id
 
     default_scope { order(:position) }
 
     validates :question_group, :question_text, :presence => true
+
     serialize :validation_rules
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :user_specific_option_text
+      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :user_specific_option_text, :parent_id
     end
 
     def self.inherited(child)
@@ -41,5 +44,6 @@ module Rapidfire
         answer.validates_length_of :answer_text, min_max
       end
     end
+
   end
 end

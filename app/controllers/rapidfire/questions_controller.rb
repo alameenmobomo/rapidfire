@@ -7,7 +7,7 @@ module Rapidfire
     before_filter :find_question!, :only => [:edit, :update, :destroy]
 
     def index
-      @questions = @question_group.questions
+      @questions = @question_group.questions.where(parent_id: nil).includes(:sub_questions)
       respond_with(@questions)
     end
 

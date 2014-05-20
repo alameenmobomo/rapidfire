@@ -20,7 +20,8 @@ module Rapidfire
     attr_accessor :question_group, :question,
       :type, :question_text, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
-      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to, :user_specific_option_text
+      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to, :user_specific_option_text, :parent_id
+
 
     delegate :valid?, :errors, :id, :to => :question
 
@@ -61,6 +62,7 @@ module Rapidfire
         :question_text  => question_text,
         :answer_options => answer_options,
         :user_specific_option_text => user_specific_option_text,
+        :parent_id => parent_id,
         :validation_rules => {
           :presence => answer_presence,
           :minimum  => answer_minimum_length,
@@ -74,6 +76,8 @@ module Rapidfire
     def from_question_to_attributes(question)
       self.type = question.type
       self.question_group  = question.question_group
+      self.parent_id = question.parent_id
+
       self.question_text   = question.question_text
       self.answer_options  = question.answer_options
       self.user_specific_option_text = question.user_specific_option_text

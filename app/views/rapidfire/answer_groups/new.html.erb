@@ -10,17 +10,28 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<p><%= @question_group.description %></p>
-			<%- if @answer_group_builder.answers.select{ |a| a.errors.messages.present? }.present? %>
+			<%- unless @answer_group_builder.answers.all?{ |a| a.errors.messages.blank? } %>
 			  <div class="alert alert-danger">
 		  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			  	Some errors in your input. Please correct them and try again.
 		  	</div>
 			<% end %>
 
-			<%- @answer_group_builder.answers.each do |answer| %>
+			<%- @answer_group_builder.answers.select{ |a| a.parent_id.blank? }.each_with_index do |answer, index| %>
 		    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      			<%= render_answer_form_helper(answer, answer_form) %>
+    			<%= render_answer_form_helper(answer, answer_form, index) %>
 		    <% end %>
+		    <!-- Sub questons loop -->
+		    <%- @answer_group_builder.answers.select{ |a| a.parent_id == answer.question.id }.each_with_index do |answer1, index1| %>
+		    	<div class="row">
+		    		<div class="col-sm-offset-1 col-sm-12">
+		    			<%= f.fields_for("#{answer1.question.id}", answer1) do |answer_form1| %>
+		      			<%= render_answer_form_helper(answer1, answer_form1, index1) %>
+				    	<% end %>
+		    		</div>
+		    	</div>
+		    <% end -%>
+		    <!-- End of Sub questions loop -->
 		  <% end %>
 		  <br>
 		  <div class="row">

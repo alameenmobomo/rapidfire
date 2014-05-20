@@ -1,5 +1,5 @@
 <tr id="question_<%= question.id %>">
-  <td><%= question.question_text %></td>
+  <td><%= question_counter + 1 %>. <%= question.question_text %></td>
   <td>
     <ul class="horizontal-list">
       <li><%= link_to "Edit", [:edit, question.question_group, question] %></li>
@@ -7,3 +7,22 @@
     </ul>
   </td>
 </tr>
+<% if question.sub_questions.present? %>
+  <% question.sub_questions.each_with_index do |sq, index| %>
+  	<tr>
+  		<td col-span="2">
+  			<div class="row">
+  				<div class="col-sm-offset-1 col-sm-7">
+  					<p><%= index +1 %>. <%= sq.question_text %></p>
+  				</div>
+  				<div class="col-sm-4">
+  					<ul class="horizontal-list">
+					      <li><%= link_to "Edit", [:edit, sq.question_group, sq] %></li>
+					      <li><%= link_to "Delete", [sq.question_group, sq], method: :delete %></li>
+					    </ul>
+  				</div>
+  			</div>
+  		</td>
+  	</tr>
+  <% end -%>
+<% end %>
