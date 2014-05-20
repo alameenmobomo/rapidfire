@@ -8,12 +8,13 @@ module Rapidfire
 
     default_scope { order(:position) }
 
-    validates :question_group, :question_text, :presence => true
+    validates :question_group, :presence => true
+    validates :question_text, :presence => true, if: 'parent_id.blank?'
 
     serialize :validation_rules
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :user_specific_option_text, :parent_id
+      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :user_specific_option_text, :parent_id, :answer_prefix, :answer_suffix
     end
 
     def self.inherited(child)
@@ -43,6 +44,10 @@ module Rapidfire
 
         answer.validates_length_of :answer_text, min_max
       end
+    end
+
+    def is_multiinput?
+      self.type.match(/MultiInput/)
     end
 
   end

@@ -7,6 +7,8 @@
 
 <div class="row m-btm-15">
 	<div class="col-md-offset-1 col-md-3">
-	<%= f.text_field :answer_text, class: 'form-control' %>
+		<%= answer.question.answer_prefix %>
+		<%= f.text_field :answer_text, class: 'form-control col-sm-2' %>
+		<%= answer.question.answer_suffix %>
 	</div>
 </div>

@@ -1,0 +1,19 @@
+<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text, class: 'question-text' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-offset-1 col-sm-11">
+		<%- @answer_group_builder.answers.select{ |a| a.parent_id == answer.question.id }.each_with_index do |answer1, index1| %>
+			<%= f.fields_for("#{answer1.question.id}", answer1) do |answer_form1| %>
+				<%= answer1.question.answer_prefix %>
+				<%= answer_form1.text_field :answer_text %>
+				<%= answer1.question.answer_suffix %>
+			<% end %>
+		<% end -%>
+	</div>
+</div>

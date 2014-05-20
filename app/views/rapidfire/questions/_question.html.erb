@@ -7,13 +7,20 @@
     </ul>
   </td>
 </tr>
+<!-- Sub Questions -->
 <% if question.sub_questions.present? %>
   <% question.sub_questions.each_with_index do |sq, index| %>
   	<tr>
   		<td col-span="2">
   			<div class="row">
   				<div class="col-sm-offset-1 col-sm-7">
-  					<p><%= index +1 %>. <%= sq.question_text %></p>
+  					<p>
+              <% if question.is_multiinput? %>
+                <%= index +1 %>. <%= sq.answer_prefix %>_______<%= sq.answer_suffix %>
+              <% else %>
+                <%= index +1 %>. <%= sq.question_text %>
+              <% end %>
+            </p>
   				</div>
   				<div class="col-sm-4">
   					<ul class="horizontal-list">
@@ -26,3 +33,4 @@
   	</tr>
   <% end -%>
 <% end %>
+<!-- End of Sub Questions -->
