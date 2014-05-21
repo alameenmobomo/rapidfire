@@ -1,15 +1,16 @@
-<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
 <div class="row">
 	<div class="col-md-12">
-		<%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text, class: 'question-text' %>
+		<%= f.label :answer_text, format('%s. %s', counter + 1, answer.question.question_text), class: 'question-text' %>
+		<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 	</div>
 </div>
 
 <div class="row m-btm-15">
 	<div class="col-md-offset-1 col-md-3">
+		<%= answer.question.answer_prefix %>
 		<%= f.text_field :answer_text, class: 'form-control' %>
+		<%= answer.question.answer_suffix %>
 	</div>
 </div>
 
-
+<%= render 'rapidfire/answers/sub_answers', answer: answer, f: f %>

@@ -1,0 +1,12 @@
+<!-- Sub questons loop -->
+<%- @answer_group_builder.answers.select{ |a| a.parent_id == answer.question.id and !answer.question.is_multiinput? }.each_with_index do |sub_answer, index1| %>
+	<%= f.fields_for("#{sub_answer.question.id}", sub_answer) do |answer_form1| %>
+    	<div class="row">
+    		<div class="col-sm-offset-1 col-sm-11">
+		    	<%= render_answer_form_helper(sub_answer, answer_form1, index1) %>
+    		</div>
+    	</div>
+	<% end %>
+<% end -%>
+<!-- End of Sub questions loop -->
+

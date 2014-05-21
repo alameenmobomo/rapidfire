@@ -8,5 +8,13 @@ module Rapidfire
     def checkbox_checked?(answer, option)
       answer.answer_text.to_s.split(",").include?(option)
     end
+
+    def multi_input_field(answer, form)
+    	if answer.question.is_select?
+    		form.select :answer_text, answer.question.options, { include_blank: true }, class: 'form-control w-200'
+  		else
+  			form.text_field :answer_text, class: 'form-control w-200'
+    	end
+    end
   end
 end

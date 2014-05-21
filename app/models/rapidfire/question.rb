@@ -50,5 +50,12 @@ module Rapidfire
       self.type.match(/MultiInput/)
     end
 
+    def is_radio?
+      self.type.match(/Radio/)
+    end
+
+    def is_select?
+      self.type.match(/Select/)
+    end
   end
 end

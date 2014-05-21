@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text, class: 'question-text' %>
+		<%= f.label :answer_text, format('%s. %s', counter + 1, answer.question.question_text), class: 'question-text' %>
 		<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 	</div>
 </div>
@@ -12,3 +12,5 @@
 		<%= answer.question.answer_suffix %>
 	</div>
 </div>
+
+<%= render 'rapidfire/answers/sub_answers', answer: answer, f: f %>

@@ -2,3 +2,5 @@
 
 <%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text %>
 <%= f.text_field :answer_text %>
+
+<%= render 'rapidfire/answers/sub_answers', answer: answer, f: f %>
