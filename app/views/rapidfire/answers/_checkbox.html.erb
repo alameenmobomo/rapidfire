@@ -1,18 +1,35 @@
-<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
-<p><%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text %></p>
+<div class="row">
+	<div class="col-md-12">
+		<%= f.label :answer_text, format('%s. %s', counter + 1, answer.question.question_text), class: 'question-text' %>
+		<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+	</div>
+</div>
 
 <div class="row">
 	<div class="form-group">
 		<%= f.fields_for :answer_text do |af| %>
-		  <%- answer.question.options.each do |option| %>
-		  	<div class="col-sm-2">
-	  			<%= af.label option do %>
-			      <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
-			      <%= option %>
-			    <% end %>
-		  	</div>
-		  <% end %>
+		  	<%- answer.question.options.each_slice(3) do |options| %>
+			  	<div class="row">
+			  		<% options.each_with_index do |option, index| %>
+			  			<%= content_tag :div, class: ['col-sm-3', ('col-sm-offset-1' if index == 0)] do %>
+				  			<%= f.label "answer_text_#{option}", option, class: 'answer-text' do %>
+							    <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
+							    <%= option %>
+							  <% end %>
+					  	<% end -%>
+				  	<% end -%>
+		  		</div>
+  			<% end -%>
+  			<div class="row">
+	  			<% if answer.question.user_specific_option_text.present? %>
+	  				<%= content_tag :div, class: ['col-sm-3', 'col-sm-offset-1'] do %>
+	  					<%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, answer.question.user_specific_option_text) }, answer.question.user_specific_option_text %>
+					    <%= answer.question.user_specific_option_text %>
+					    <%= f.text_field :user_specific_option, class: 'form-control' %>
+				    <% end -%>
+	  			<% end %>
+  			</div>
 		<% end %>
 	</div>
 </div>

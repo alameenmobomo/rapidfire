@@ -21,7 +21,7 @@ module Rapidfire
     attr_accessor :question_group, :question,
       :type, :question_text, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
-      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to, :user_specific_option_text, :parent_id, :answer_prefix, :answer_suffix
+      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to, :user_specific_option_text, :parent_id, :answer_prefix, :answer_suffix, :no_answer_fields
 
 
     delegate :valid?, :errors, :id, :to => :question
@@ -65,6 +65,7 @@ module Rapidfire
         :answer_options => answer_options,
         :user_specific_option_text => user_specific_option_text,
         :parent_id => parent_id,
+        :no_answer_fields => no_answer_fields,
         :answer_prefix => answer_prefix,
         :answer_suffix => answer_suffix,
 
@@ -86,6 +87,7 @@ module Rapidfire
       
       self.answer_options  = question.answer_options
       self.user_specific_option_text = question.user_specific_option_text
+      self.no_answer_fields = question.no_answer_fields
       self.answer_prefix = question.answer_prefix
       self.answer_suffix = question.answer_suffix
 
