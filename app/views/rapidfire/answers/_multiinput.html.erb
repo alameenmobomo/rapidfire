@@ -10,7 +10,7 @@
 	<div class="col-sm-offset-1 col-sm-11">
 		<%- @answer_group_builder.answers.select{ |a| a.parent_id == answer.question.id }.each_with_index do |answer1, index1| %>
 			<div class="m-btm-5">
-				<%= f.fields_for("#{answer1.question.id}", answer1) do |answer_form1| %>
+				<%= main_form.fields_for("#{answer1.question.id}", answer1) do |answer_form1| %>
 					<%= answer1.question.answer_prefix %>
 					<%= multi_input_field(answer1, answer_form1) %>
 					<%= answer1.question.answer_suffix %>

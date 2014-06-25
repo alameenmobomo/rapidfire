@@ -3,4 +3,4 @@
 <%= counter + 1 %>. <%= f.label :answer_text, answer.question.question_text %>
 <%= f.text_area :answer_text, :rows => 5 %>
 
-<%= render 'rapidfire/answers/sub_answers', answer: answer, f: f %>
+<%= render 'rapidfire/answers/sub_answers', answer: answer, main_form: main_form %>
